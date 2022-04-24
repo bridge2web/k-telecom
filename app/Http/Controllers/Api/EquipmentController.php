@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Equipment;
 use App\Http\Requests\StoreEquipmentRequest;
 use App\Http\Requests\UpdateEquipmentRequest;
@@ -15,7 +16,7 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        //
+        echo 111;
     }
 
     /**

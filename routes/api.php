@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\EquipmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
+
+//Route::group(['namespace' => 'Api'], function () {
+
+    Route::resource('equipment', EquipmentController::class);
+
+
+    /*Route::resource('articles', 'ArticleController', [
+        'except' => [
+            'create', 'edit'
+        ]
+    ]);
+
+    Route::resource('articles/{article}/comments', 'CommentController', [
+        'only' => [
+            'index', 'store', 'destroy'
+        ]
+    ]);*/
+
+//});
