@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\EquipmentController;
+use App\Http\Controllers\Api\EquipmentTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,8 @@ use App\Http\Controllers\Api\EquipmentController;
 
 //Route::group(['namespace' => 'Api'], function () {
 
-    Route::resource('equipment', EquipmentController::class);
-
+Route::apiResource('equipment', EquipmentController::class);
+Route::apiResource('equipment-type', EquipmentTypeController::class);
 
     /*Route::resource('articles', 'ArticleController', [
         'except' => [

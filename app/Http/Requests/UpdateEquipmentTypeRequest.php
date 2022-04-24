@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\SnMask;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEquipmentRequest extends FormRequest
+class UpdateEquipmentTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class StoreEquipmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -25,8 +24,7 @@ class StoreEquipmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'equipment_type_id' => 'required|exists:equipment_type,id',
-            'sn' => ['required', 'unique:equipment', 'max:10', new SnMask]
+            //
         ];
     }
 }

@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Equipment extends Model
+class EquipmentType extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'equipment';
+    protected $table = 'equipment_type';
 
     /**
      * The attributes that aren't mass assignable.
@@ -26,14 +26,4 @@ class Equipment extends Model
      * @var bool
      */
     public $timestamps = false;
-
-    /**
-     * Get the equipment type.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function type()
-    {
-        return $this->belongsTo(EquipmentType::class);
-    }
 }
