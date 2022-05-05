@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\EquipmentType;
 use App\Http\Requests\StoreEquipmentTypeRequest;
 use App\Http\Requests\UpdateEquipmentTypeRequest;
+use App\Http\Resources\EquipmentTypeCollection;
+use App\Http\Resources\EquipmentTypeResource;
 
 class EquipmentTypeController extends Controller
 {
@@ -16,7 +18,7 @@ class EquipmentTypeController extends Controller
      */
     public function index()
     {
-        //
+        return new EquipmentTypeCollection(EquipmentType::paginate());
     }
 
     /**
@@ -33,12 +35,12 @@ class EquipmentTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\EquipmentType  $equipmentType
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(EquipmentType $equipmentType)
+    public function show(int $id)
     {
-        //
+        return new EquipmentTypeResource(EquipmentType::findOrFail($id));
     }
 
     /**
@@ -56,11 +58,12 @@ class EquipmentTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\EquipmentType  $equipmentType
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EquipmentType $equipmentType)
+    public function destroy(int $id)
     {
-        //
+        $model = EquipmentType::findOrFail($id);
+        if ($model->delete()) return response(null, 204);
     }
 }

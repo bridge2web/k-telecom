@@ -3,9 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Log;
 
-class EquipmentResource extends JsonResource
+class EquipmentTypeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,9 +14,6 @@ class EquipmentResource extends JsonResource
      */
     public function toArray($request)
     {
-        //Log::debug($request);
-        $resource = parent::toArray($request);
-        //Log::debug($resource);
-        return $resource;
+        return parent::toArray($request);
     }
 }

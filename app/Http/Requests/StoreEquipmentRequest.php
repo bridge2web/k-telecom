@@ -8,6 +8,13 @@ use Illuminate\Foundation\Http\FormRequest;
 class StoreEquipmentRequest extends FormRequest
 {
     /**
+     * Indicates whether validation should stop after the first rule failure.
+     *
+     * @var bool
+     */
+    protected $stopOnFirstFailure = true;
+
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -26,7 +33,7 @@ class StoreEquipmentRequest extends FormRequest
     {
         return [
             'equipment_type_id' => 'required|exists:equipment_type,id',
-            'sn' => ['required', 'unique:equipment', 'max:10', new SnMask]
+            'sn' => ['exclude_if:equipment_type_id,false', 'required', 'unique:equipment', 'max:10', new SnMask]
         ];
     }
 }

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Equipment;
 use App\Http\Requests\StoreEquipmentRequest;
 use App\Http\Requests\UpdateEquipmentRequest;
+use App\Http\Resources\EquipmentCollection;
+use App\Http\Resources\EquipmentResource;
+use Illuminate\Support\Facades\Log;
 
 class EquipmentController extends Controller
 {
@@ -16,7 +19,8 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        echo 111;
+        Log::debug(get_class(Equipment::paginate()));
+        return new EquipmentCollection(Equipment::paginate());
     }
 
     /**
@@ -33,22 +37,22 @@ class EquipmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Equipment  $equipment
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Equipment $equipment)
+    public function show(int $id)
     {
-        //
+        return new EquipmentResource(Equipment::findOrFail($id));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateEquipmentRequest  $request
-     * @param  \App\Models\Equipment  $equipment
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateEquipmentRequest $request, Equipment $equipment)
+    public function update(UpdateEquipmentRequest $request, int $id)
     {
         //
     }
@@ -56,11 +60,12 @@ class EquipmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Equipment  $equipment
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Equipment $equipment)
+    public function destroy(int $id)
     {
-        //
+        $model = Equipment::findOrFail($id);
+        if ($model->delete()) return response(null, 204);
     }
 }

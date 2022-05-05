@@ -20,21 +20,10 @@ use App\Http\Controllers\Api\EquipmentTypeController;
     return $request->user();
 });*/
 
-//Route::group(['namespace' => 'Api'], function () {
+Route::apiResource('equipment', EquipmentController::class)->parameters([
+    'equipment' => 'id'
+]);
 
-Route::apiResource('equipment', EquipmentController::class);
-Route::apiResource('equipment-type', EquipmentTypeController::class);
-
-    /*Route::resource('articles', 'ArticleController', [
-        'except' => [
-            'create', 'edit'
-        ]
-    ]);
-
-    Route::resource('articles/{article}/comments', 'CommentController', [
-        'only' => [
-            'index', 'store', 'destroy'
-        ]
-    ]);*/
-
-//});
+Route::apiResource('equipment-type', EquipmentTypeController::class)->parameters([
+    'equipment-type' => 'id'
+]);

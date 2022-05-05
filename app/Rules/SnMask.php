@@ -4,6 +4,8 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Log;
+use App\Models\EquipmentType;
 
 class SnMask implements Rule, DataAwareRule
 {
@@ -33,8 +35,9 @@ class SnMask implements Rule, DataAwareRule
      */
     public function passes($attribute, $value)
     {
-
-        return false;
+        $type = EquipmentType::find($this->data['equipment_type_id']);
+        $mask = $type->sn_mask;
+        return $this->check($value, $mask);
     }
 
     /**
@@ -57,5 +60,38 @@ class SnMask implements Rule, DataAwareRule
     public function message()
     {
         return 'The serial number is not valid.';
+    }
+
+    /**
+     * Check SN by mask
+     *
+     * @param  string  $value
+     * @param  string  $mask
+     * @return bool
+     */
+    private function check($sn, $mask)
+    {
+        if (strlen($sn) != strlen($mask))
+            return false;
+
+        $charToRegex = [
+            'N' => '[0-9]',
+            'A' => '[A-Z]',
+            'a' => '[a-z]',
+            'X' => '[A-Z0-9]',
+            'Z' => '[-|_|@]'
+        ];
+
+        $maskChars = str_split($mask);
+
+        $regex = '/^';
+        foreach ($maskChars as $char) {
+            $regex .= $charToRegex[$char];
+        }
+        $regex .= '/';
+
+        //Log::debug($regex);
+
+        return preg_match($regex, $sn) > 0 ? true : false;
     }
 }
