@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: db
--- Время создания: Апр 22 2022 г., 17:24
+-- Время создания: Апр 26 2022 г., 17:11
 -- Версия сервера: 5.7.37
 -- Версия PHP: 8.0.18
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `travellist`
+-- База данных: `ktelecom`
 --
 
 -- --------------------------------------------------------
@@ -45,6 +45,15 @@ CREATE TABLE `equipment_type` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `sn_mask` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `equipment_type`
+--
+
+INSERT INTO `equipment_type` (`id`, `name`, `sn_mask`) VALUES
+(1, 'TP-Link TL-WR74', 'XXAAAAAXAA'),
+(2, 'D-Link DIR-300', 'NXXAAXZXaa'),
+(3, 'D-Link DIR-300 S', 'NXXAAXZXXX');
 
 --
 -- Индексы сохранённых таблиц
@@ -78,7 +87,7 @@ ALTER TABLE `equipment`
 -- AUTO_INCREMENT для таблицы `equipment_type`
 --
 ALTER TABLE `equipment_type`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
