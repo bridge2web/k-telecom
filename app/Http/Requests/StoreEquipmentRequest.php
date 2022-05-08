@@ -33,7 +33,8 @@ class StoreEquipmentRequest extends FormRequest
     {
         return [
             'equipment_type_id' => 'required|exists:equipment_type,id',
-            'sn' => ['exclude_if:equipment_type_id,false', 'required', 'unique:equipment', 'max:10', new SnMask]
+            'sn' => ['exclude_if:equipment_type_id,false', 'required', 'unique:equipment', 'max:10', new SnMask],
+            'note' => 'nullable|string'
         ];
     }
 }

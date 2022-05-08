@@ -32,7 +32,7 @@ class Equipment extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function type()
+    public function equipmentType()
     {
         return $this->belongsTo(EquipmentType::class);
     }

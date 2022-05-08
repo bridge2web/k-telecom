@@ -19,8 +19,7 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        Log::debug(get_class(Equipment::paginate()));
-        return new EquipmentCollection(Equipment::paginate());
+        return new EquipmentCollection(Equipment::with('equipmentType')->paginate());
     }
 
     /**
