@@ -19,7 +19,7 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        return new EquipmentCollection(Equipment::with('equipmentType')->paginate());
+        return new EquipmentCollection(Equipment::paginate());
     }
 
     /**
@@ -53,7 +53,10 @@ class EquipmentController extends Controller
      */
     public function update(UpdateEquipmentRequest $request, int $id)
     {
-        //
+        $model = Equipment::findOrFail($id);
+        $model->fill($request->validated());
+        $model->saveOrFail();
+        return new EquipmentResource($model);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\EquipmentController;
 use App\Http\Controllers\Api\EquipmentTypeController;
 
@@ -20,10 +21,17 @@ use App\Http\Controllers\Api\EquipmentTypeController;
     return $request->user();
 });*/
 
-Route::apiResource('equipment', EquipmentController::class)->parameters([
-    'equipment' => 'id'
-]);
+Route::post('register', [AuthController::class, 'register'])->name('register');
+Route::post('login', [AuthController::class, 'login'])->name('login');
 
-Route::apiResource('equipment-type', EquipmentTypeController::class)->parameters([
-    'equipment-type' => 'id'
-]);
+//Route::middleware('auth:api')->group(function () {
+    Route::apiResource('equipment', EquipmentController::class)->parameters([
+        'equipment' => 'id'
+    ]);
+
+    Route::apiResource('equipment-type', EquipmentTypeController::class)->parameters([
+        'equipment-type' => 'id'
+    ]);
+
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+//});

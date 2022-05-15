@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\SnMask;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateEquipmentRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Indicates whether validation should stop after the first rule failure.
@@ -32,9 +31,9 @@ class UpdateEquipmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'equipment_type_id' => 'required|exists:equipment_type,id',
-            'sn' => ['exclude_if:equipment_type_id,false', 'required', 'unique:equipment,id,' . $this->id, 'max:10', new SnMask],
-            'note' => 'nullable|string'
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed'
         ];
     }
 }
