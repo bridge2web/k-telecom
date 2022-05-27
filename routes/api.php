@@ -21,10 +21,10 @@ use App\Http\Controllers\Api\EquipmentTypeController;
     return $request->user();
 });*/
 
-Route::post('register', [AuthController::class, 'register'])->name('register');
-Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::post('auth/register', [AuthController::class, 'register'])->name('user.register');
+Route::post('auth/login', [AuthController::class, 'login'])->name('user.login');
 
-//Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:api')->group(function () {
     Route::apiResource('equipment', EquipmentController::class)->parameters([
         'equipment' => 'id'
     ]);
@@ -33,5 +33,5 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
         'equipment-type' => 'id'
     ]);
 
-    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-//});
+    Route::post('auth/logout', [AuthController::class, 'logout'])->name('user.logout');
+});
