@@ -3,9 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Log;
 
-class EquipmentResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +16,10 @@ class EquipmentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'equipment_type_id' => $this->equipment_type_id,
-            'sn' => $this->sn,
-            'note' => $this->note
+            'name' => $this->name,
+            'email' => $this->email,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

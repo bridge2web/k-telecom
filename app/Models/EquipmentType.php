@@ -11,7 +11,7 @@ class EquipmentType extends Model
      *
      * @var string
      */
-    protected $table = 'equipment_type';
+    protected $table = 'equipment_types';
 
     /**
      * The attributes that aren't mass assignable.

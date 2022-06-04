@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
+use App\Http\Resources\AuthResource;
 
 class AuthController extends Controller
 {
@@ -18,8 +19,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         $user = User::create($request->validated());
-
-        return ['accessToken' => $user->createToken('Password Grant Client')->accessToken];
+        return new AuthResource($user);
     }
 
     public function login(LoginRequest $request)
@@ -30,10 +30,7 @@ class AuthController extends Controller
 
         if (!$user) return false;
 
-        return [
-            'accessToken' => $user->createToken('Password Grant Client')->accessToken,
-            'user' => $user
-        ];
+        return new AuthResource($user);
     }
 
     public function logout(Request $request)

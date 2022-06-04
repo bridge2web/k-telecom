@@ -31,10 +31,23 @@ class StoreEquipmentRequest extends FormRequest
      */
     public function rules()
     {
+        if ($this->isArray()) {
+            return [
+                '*.equipment_type_id' => 'required|exists:equipment_types,id',
+                '*.sn' => ['exclude_if:equipment_type_id,false', 'required', 'distinct', 'unique:equipments', 'max:10', new SnMask],
+                '*.note' => 'nullable|string'
+            ];
+        }
         return [
-            'equipment_type_id' => 'required|exists:equipment_type,id',
-            'sn' => ['exclude_if:equipment_type_id,false', 'required', 'unique:equipment', 'max:10', new SnMask],
+            'equipment_type_id' => 'required|exists:equipment_types,id',
+            'sn' => ['exclude_if:equipment_type_id,false', 'required', 'unique:equipments', 'max:10', new SnMask],
             'note' => 'nullable|string'
         ];
+    }
+
+    public function isArray()
+    {
+        $validationData = $this->validationData();
+        return isset($validationData[0]) && is_array($validationData[0]);
     }
 }

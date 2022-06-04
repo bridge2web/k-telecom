@@ -35,7 +35,14 @@ class SnMask implements Rule, DataAwareRule
      */
     public function passes($attribute, $value)
     {
-        $type = EquipmentType::find($this->data['equipment_type_id']);
+
+        if (strpos($attribute, '.') !== false) { // is array
+            $index = (int)strtok($attribute, '.');
+            $typeId = $this->data[0]['equipment_type_id'];
+        } else {
+            $typeId = $this->data['equipment_type_id'];
+        }
+        $type = EquipmentType::find($typeId);
         $mask = $type->sn_mask;
         return $this->check($value, $mask);
     }

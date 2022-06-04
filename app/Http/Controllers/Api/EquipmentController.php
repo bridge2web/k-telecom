@@ -8,7 +8,6 @@ use App\Http\Requests\StoreEquipmentRequest;
 use App\Http\Requests\UpdateEquipmentRequest;
 use App\Http\Resources\EquipmentCollection;
 use App\Http\Resources\EquipmentResource;
-use Illuminate\Support\Facades\Log;
 
 class EquipmentController extends Controller
 {
@@ -30,7 +29,15 @@ class EquipmentController extends Controller
      */
     public function store(StoreEquipmentRequest $request)
     {
-        return Equipment::create($request->validated());
+        if ($request->isArray()) {
+            $response = [];
+            foreach ($request->validated() as $model) {
+                //$response[] = Equipment::create($request->validated());
+            }
+            return $response;
+        } else {
+            //return Equipment::create($request->validated());
+        }
     }
 
     /**
