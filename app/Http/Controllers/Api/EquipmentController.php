@@ -32,11 +32,11 @@ class EquipmentController extends Controller
         if ($request->isArray()) {
             $response = [];
             foreach ($request->validated() as $model) {
-                //$response[] = Equipment::create($request->validated());
+                $response[] = Equipment::create($model);
             }
             return $response;
         } else {
-            //return Equipment::create($request->validated());
+            return Equipment::create($request->validated());
         }
     }
 
